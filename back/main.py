@@ -22,6 +22,7 @@ mail = Mail(app)
 @app.route('/health-check')
 def check():
     """Health-check endpoint"""
+    pdf.generate_pdf()
     return jsonify(
     status=200
 )
@@ -31,6 +32,7 @@ def send_mail():
     """Send detailed result from form by mail endpoint"""
     msg = Message(subject='Questionnaire mouvement en entreprise', sender='elouandacostapeixoto@gmail.com', recipients=['elouan@bodih.fr'])
     msg.body = "Résultat détaillé du questionnaire mouvement en entreprise de Bodih."
+    # msg.attach
     mail.send(msg)
     return "Message sent!"
 
