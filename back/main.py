@@ -30,7 +30,7 @@ def mail():
     """Send detailed result from form by mail endpoint"""
     content = request.json
     pdf.generate_pdf(content)
-    mailing.send_mail(app)
+    mailing.send_mail(app, content)
     return "Message sent"
 
 if __name__ == '__main__':
