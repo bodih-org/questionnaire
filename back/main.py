@@ -2,9 +2,9 @@
 import os
 from flask import jsonify
 import features.pdf as pdf
+import features.mail as mailing
 
 from flask import Flask
-from flask_mail import Mail, Message
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,25 +17,20 @@ app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PWD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
-mail = Mail(app)
 
 @app.route('/health-check')
 def check():
     """Health-check endpoint"""
-    pdf.generate_pdf()
     return jsonify(
-    status=200
-)
+        status=200
+    )
 
 @app.route('/mail')
-def send_mail():
+def mail():
     """Send detailed result from form by mail endpoint"""
-    msg = Message(subject='Questionnaire mouvement en entreprise', sender='elouandacostapeixoto@gmail.com', recipients=['elouan@bodih.fr'])
-    msg.body = "Résultat détaillé du questionnaire mouvement en entreprise de Bodih."
-    # msg.attach
-    mail.send(msg)
-    return "Message sent!"
-
+    pdf.generate_pdf()
+    mailing.send_mail(app)
+    return "Message sent"
 
 if __name__ == '__main__':
     app.run(debug=True)
