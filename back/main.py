@@ -1,6 +1,6 @@
 """Main module"""
 import os
-from flask import jsonify
+from flask import jsonify, request
 import features.pdf as pdf
 import features.mail as mailing
 
@@ -25,10 +25,11 @@ def check():
         status=200
     )
 
-@app.route('/mail')
+@app.route('/mail', methods=['POST'])
 def mail():
     """Send detailed result from form by mail endpoint"""
-    pdf.generate_pdf()
+    content = request.json
+    pdf.generate_pdf(content)
     mailing.send_mail(app)
     return "Message sent"
 
