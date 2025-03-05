@@ -11,7 +11,7 @@ def send_mail(app, content):
             status=400
         )
     mail = Mail(app)
-    msg = Message(subject='Questionnaire mouvement en entreprise', sender='elouandacostapeixoto@gmail.com', recipients=['elouan@bodih.fr'])
+    msg = Message(subject='Questionnaire mouvement en entreprise', sender='elouandacostapeixoto@gmail.com', recipients=[content['email']])
     msg.body = "Résultat détaillé du questionnaire mouvement en entreprise de Bodih."
     with open(pdf_file, 'rb') as fp:
         msg.attach(pdf_file, "application/pdf", fp.read())

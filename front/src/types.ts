@@ -30,5 +30,6 @@ export type MaturityLevel = 'En recul' | 'À l\'arrêt' | 'En marche' | 'En mouv
 
 export interface EmailData {
   email: string;
+  entreprise: string;
   consent: boolean;
 }

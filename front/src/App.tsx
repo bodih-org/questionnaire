@@ -7,6 +7,7 @@ import { ResultsChart } from './components/ResultsChart';
 import { EmailForm } from './components/EmailForm';
 import { FormData, EmailData, Results } from './types';
 import { calculateResults } from './utils/calculations';
+import { SendMail } from './fetch/mail';
 
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -46,6 +47,8 @@ function App() {
     // Here you would integrate with Sarbacane to send the email
     console.log('Email submitted:', data);
     console.log('Results:', results);
+    SendMail(data);
+
   };
 
   if (results && showEmailForm) {

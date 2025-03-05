@@ -7,6 +7,7 @@ interface EmailFormProps {
 
 export const EmailForm: React.FC<EmailFormProps> = ({ onSubmit }) => {
   const [email, setEmail] = useState('');
+  const [entreprise, setEntreprise] = useState('');
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
 
@@ -23,7 +24,7 @@ export const EmailForm: React.FC<EmailFormProps> = ({ onSubmit }) => {
       return;
     }
     
-    onSubmit({ email, consent });
+    onSubmit({ email, entreprise, consent });
   };
 
   return (
@@ -41,6 +42,20 @@ export const EmailForm: React.FC<EmailFormProps> = ({ onSubmit }) => {
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="votre@email.com"
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          Entreprise
+        </label>
+        <input
+          type="text"
+          id="entreprise"
+          value={entreprise}
+          onChange={(e) => setEntreprise(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="votre entreprise"
         />
       </div>
       
